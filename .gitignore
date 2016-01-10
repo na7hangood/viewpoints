@@ -5,6 +5,7 @@ project/boot/
 .idea_modules/
 
 node_modules/
+jspm_packages/
 
 logs/*
 

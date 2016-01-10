@@ -1,4 +1,5 @@
 # Handled by client side code
+GET        /                              controllers.App.index
 GET        /hello                         controllers.App.hello
 GET        /oauthCallback                 controllers.Login.oauthCallback
 GET        /logout                        controllers.Login.logout
