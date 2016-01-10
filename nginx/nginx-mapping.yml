@@ -1,0 +1,4 @@
+name: uselectoms
+mappings:
+  - prefix: uselectoms
+    port: 9258
