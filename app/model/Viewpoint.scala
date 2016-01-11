@@ -30,7 +30,7 @@ case class Viewpoint(
 }
 
 object Viewpoint {
-  implicit val commenterFormat: Format[Viewpoint] = (
+  implicit val viewpointFormat: Format[Viewpoint] = (
     (JsPath \ "commenter").format[Commenter] and
       (JsPath \ "quote").format[String] and
       (JsPath \ "link").formatNullable[String] and
