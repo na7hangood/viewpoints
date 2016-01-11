@@ -10,6 +10,7 @@ import scala.util.control.NonFatal
 
 
 case class Commenter(
+  id: Long,
   name: String,
   imageUrl: Option[String],
   description: Option[String],
@@ -32,7 +33,8 @@ case class Commenter(
 
 object Commenter {
   implicit val commenterFormat: Format[Commenter] = (
-    (JsPath \ "name").format[String] and
+    (JsPath \ "id").format[Long] and
+      (JsPath \ "name").format[String] and
       (JsPath \ "imageUrl").formatNullable[String] and
       (JsPath \ "description").formatNullable[String] and
       (JsPath \ "party").formatNullable[String] and
