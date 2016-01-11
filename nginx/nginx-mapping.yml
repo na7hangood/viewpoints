@@ -1,4 +1,4 @@
-name: uselectoms
+name: viewpoints
 mappings:
   - prefix: viewpoints
     port: 9258
