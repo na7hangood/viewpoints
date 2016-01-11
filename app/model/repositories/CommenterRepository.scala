@@ -7,7 +7,7 @@ import scala.collection.JavaConversions._
 
 object CommenterRepository {
 
-  def getCommenters(id: Long) = {
+  def getCommenter(id: Long) = {
     Option(Dynamo.commenterTable.getItem("id", id)).map(Commenter.fromItem)
   }
 

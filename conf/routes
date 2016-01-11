@@ -4,6 +4,13 @@ GET        /hello                         controllers.App.hello
 GET        /oauthCallback                 controllers.Login.oauthCallback
 GET        /logout                        controllers.Login.logout
 
+# API
+GET        /api/commenters                controllers.Api.getCommenters
+GET        /api/commenter/:id             controllers.Api.getCommenter(id: Long)
+
+GET        /api/subjects                  controllers.Api.getSubjects
+GET        /api/subject/:id               controllers.Api.getsubject(id: Long)
+
 # Management
 GET        /management/healthcheck        controllers.Management.healthCheck
 
