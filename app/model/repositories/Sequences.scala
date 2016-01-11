@@ -9,6 +9,7 @@ import services.Dynamo
 object Sequences {
 
   val commenterId = new DynamoSequence(Dynamo.sequenceTable, "commenterId")
+  val subjectId = new DynamoSequence(Dynamo.sequenceTable, "subjectId")
 }
 
 class DynamoSequence(sequenceTable: Table, sequenceName: String) {

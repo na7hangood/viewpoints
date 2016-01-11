@@ -48,6 +48,7 @@ object Dynamo {
   lazy val dynamoDb = new DynamoDB(client)
 
   lazy val commenterTable = dynamoDb.getTable(Config().commenterTableName)
+  lazy val subjectTable = dynamoDb.getTable(Config().subjectTableName)
   lazy val sequenceTable = dynamoDb.getTable(Config().sequenceTableName)
 }
 

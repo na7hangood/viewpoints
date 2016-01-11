@@ -24,6 +24,7 @@ object Config extends AwsInstanceTags {
 sealed trait Config {
 
   def commenterTableName: String
+  def subjectTableName: String
   def sequenceTableName: String
 
   def logShippingStreamName: Option[String]
@@ -33,6 +34,7 @@ sealed trait Config {
 
 class DevConfig extends Config {
   override def commenterTableName = "viewpoints-commenter-dev"
+  override def subjectTableName = "viewpoints-subject-dev"
   override def sequenceTableName = "viewpoints-sequence-dev"
 
   override def logShippingStreamName = Some("elk-CODE-KinesisStream-M03ERGK5PVD9")
@@ -42,6 +44,7 @@ class DevConfig extends Config {
 
 class CodeConfig extends Config {
   override def commenterTableName = "viewpoints-commenter-dev"
+  override def subjectTableName = "viewpoints-subject-dev"
   override def sequenceTableName = "viewpoints-sequence-dev"
 
   override def logShippingStreamName = Some("elk-PROD-KinesisStream-1PYU4KS1UEQA")
@@ -51,6 +54,7 @@ class CodeConfig extends Config {
 
 class ProdConfig extends Config {
   override def commenterTableName = "viewpoints-commenter-prod"
+  override def subjectTableName = "viewpoints-subject-prod"
   override def sequenceTableName = "viewpoints-sequence-prod"
 
   override def logShippingStreamName = Some("elk-PROD-KinesisStream-1PYU4KS1UEQA")

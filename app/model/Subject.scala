@@ -10,6 +10,7 @@ import scala.util.control.NonFatal
 
 
 case class Subject(
+  id: Long,
   name: String,
   link: Option[String],
   viewpoints: List[Viewpoint],
@@ -29,6 +30,7 @@ case class Subject(
 
 object Subject {
   implicit val subjectFormat: Format[Subject] = (
+    (JsPath \ "id").format[Long] and
     (JsPath \ "name").format[String] and
       (JsPath \ "link").formatNullable[String] and
       (JsPath \ "viewpoints").format[List[Viewpoint]] and
