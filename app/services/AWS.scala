@@ -46,6 +46,9 @@ trait AwsInstanceTags {
 object Dynamo {
   lazy val client = AWS.region.createClient(classOf[AmazonDynamoDBClient], null, null)
   lazy val dynamoDb = new DynamoDB(client)
+
+  lazy val commenterTable = dynamoDb.getTable(Config().commenterTableName)
+  lazy val sequenceTable = dynamoDb.getTable(Config().sequenceTableName)
 }
 
 
