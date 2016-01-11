@@ -12,7 +12,8 @@ import scala.util.control.NonFatal
 case class Subject(
   name: String,
   link: Option[String],
-  viewpoints: List[Viewpoint]
+  viewpoints: List[Viewpoint],
+  revision: Long
 ) {
   def toItem = Item.fromJSON(Json.toJson(this).toString())
 
@@ -27,10 +28,11 @@ case class Subject(
 }
 
 object Subject {
-  implicit val commenterFormat: Format[Subject] = (
+  implicit val subjectFormat: Format[Subject] = (
     (JsPath \ "name").format[String] and
       (JsPath \ "link").formatNullable[String] and
-      (JsPath \ "viewpoints").format[List[Viewpoint]]
+      (JsPath \ "viewpoints").format[List[Viewpoint]] and
+      (JsPath \ "revision").format[Long]
     )(Subject.apply, unlift(Subject.unapply))
 
   def fromItem(item: Item) = try {
@@ -40,5 +42,5 @@ object Subject {
 
   }
 
-  def fromJson(json: JsValue) = json.as[Viewpoint]
+  def fromJson(json: JsValue) = json.as[Subject]
 }
