@@ -2,7 +2,7 @@ addCommandAlias("dist", ";riffRaffArtifact")
 
 import play.PlayImport.PlayKeys._
 
-name := "us-election-atoms"
+name := "viewpoints"
 
 version := "1.0"
 
@@ -35,12 +35,12 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala, RiffRaffArtifact
     riffRaffArtifactResources := Seq(
       riffRaffPackageType.value -> s"packages/${name.value}/${riffRaffPackageType.value.getName}",
       baseDirectory.value / "deploy.json" -> "deploy.json",
-      baseDirectory.value / "cloudformation" / "us-election-atoms.json" ->
-        "packages/cloudformation/us-election-atoms.json"
+      baseDirectory.value / "cloudformation" / "viewpoints.json" ->
+        "packages/cloudformation/viewpoints.json"
     ),
     doc in Compile <<= target.map(_ / "none"),
     scalaVersion := "2.11.7",
     scalaVersion in ThisBuild := "2.11.7",
     libraryDependencies ++= dependencies
   )
-  .settings(UsElectionAtoms.settings: _*)
+  .settings(ViewpointsBuild.settings: _*)

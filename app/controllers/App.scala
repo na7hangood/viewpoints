@@ -6,7 +6,7 @@ import play.api.mvc.{Action, Controller}
 object App extends Controller with PanDomainAuthActions {
 
   def index = AuthAction {
-    Ok(views.html.Application.app("Tag Manager"))
+    Ok(views.html.Application.app("Viewpoints"))
   }
 
 //  def index(id: String = "") = AuthAction.async { req =>

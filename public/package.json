@@ -1,7 +1,7 @@
 {
-  "name": "uselectionatoms",
+  "name": "viewpoints",
   "version": "0.0.1",
-  "description": "Tool for managing us election atoms",
+  "description": "Tool for managing viewpoint atoms",
   "jspm": {
     "dependencies": {
       "react": "npm:react@^0.14.0",

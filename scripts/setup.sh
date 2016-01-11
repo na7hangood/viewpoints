@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-printf "\n\rSetting up Us election atoms Client Side dependancies... \n\r\n\r"
+printf "\n\rSetting up viewpoints atom Client Side dependancies... \n\r\n\r"
 
 cd public
 

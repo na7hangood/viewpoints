@@ -16,5 +16,5 @@ trait PanDomainAuthActions extends AuthActions {
 
   override lazy val domain: String = Config().pandaDomain
 
-  override lazy val system: String = "uselectoms"
+  override lazy val system: String = "viewpoints"
 }

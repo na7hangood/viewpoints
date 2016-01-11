@@ -38,7 +38,7 @@ sealed trait Config {
   object aws {
     lazy val stack = readTag("Stack") getOrElse "flexible"
     lazy val stage = readTag("Stage") getOrElse "DEV"
-    lazy val app = readTag("App") getOrElse "uselectoms"
+    lazy val app = readTag("App") getOrElse "viewpoints"
   }
 
   private def loadConfiguration = {
@@ -81,19 +81,19 @@ sealed trait Config {
 class DevConfig extends Config {
   override def logShippingStreamName = Some("elk-CODE-KinesisStream-M03ERGK5PVD9")
   override def pandaDomain: String = "local.dev-gutools.co.uk"
-  override def pandaAuthCallback: String = "https://uselectoms.local.dev-gutools.co.uk/oauthCallback"
+  override def pandaAuthCallback: String = "https://viewpoints.local.dev-gutools.co.uk/oauthCallback"
 }
 
 class CodeConfig extends Config {
   override def logShippingStreamName = Some("elk-PROD-KinesisStream-1PYU4KS1UEQA")
   override def pandaDomain: String = "code.dev-gutools.co.uk"
-  override def pandaAuthCallback: String = "https://uselectoms.code.dev-gutools.co.uk/oauthCallback"
+  override def pandaAuthCallback: String = "https://viewpoints.code.dev-gutools.co.uk/oauthCallback"
 }
 
 class ProdConfig extends Config {
   override def logShippingStreamName = Some("elk-PROD-KinesisStream-1PYU4KS1UEQA")
   override def pandaDomain: String = "gutools.co.uk"
-  override def pandaAuthCallback: String = "https://uselectoms.gutools.co.uk/oauthCallback"
+  override def pandaAuthCallback: String = "https://viewpoints.gutools.co.uk/oauthCallback"
 }
 
 

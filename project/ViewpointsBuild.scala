@@ -10,9 +10,9 @@ import com.typesafe.sbt.web.Import.WebKeys._
 
 
 /**
- * Front-end specific settings for Us Election atoms manager in SBT.
+ * Front-end specific settings for viewpoints atom manager in SBT.
  */
-object UsElectionAtoms {
+object ViewpointsBuild {
   val gzipSettings = Seq(includeFilter in gzip := "*.html" || "*.css" || "*.js")
 
   val assetPipelineSettings = Seq(pipelineStages := Seq(digest, gzip))
