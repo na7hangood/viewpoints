@@ -19,6 +19,7 @@ System.config({
     "babel-runtime": "npm:babel-runtime@5.8.25",
     "core-js": "npm:core-js@1.2.2",
     "react": "npm:react@0.14.0",
+    "react-bootstrap": "npm:react-bootstrap@0.28.2",
     "react-dom": "npm:react-dom@0.14.0",
     "react-router": "npm:react-router@1.0.3",
     "reqwest": "github:ded/reqwest@2.0.5",
@@ -120,6 +121,9 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "source-map": "npm:source-map@0.1.31"
     },
+    "npm:lodash-compat@3.10.1": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:loose-envify@1.1.0": {
       "js-tokens": "npm:js-tokens@1.0.2",
       "process": "github:jspm/nodelibs-process@0.1.2",
@@ -139,8 +143,37 @@ System.config({
     "npm:query-string@3.0.0": {
       "strict-uri-encode": "npm:strict-uri-encode@1.1.0"
     },
+    "npm:react-bootstrap@0.28.2": {
+      "babel-runtime": "npm:babel-runtime@5.8.25",
+      "classnames": "npm:classnames@2.2.3",
+      "dom-helpers": "npm:dom-helpers@2.4.0",
+      "invariant": "npm:invariant@2.2.0",
+      "keycode": "npm:keycode@2.1.0",
+      "lodash-compat": "npm:lodash-compat@3.10.1",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.0",
+      "react-dom": "npm:react-dom@0.14.0",
+      "react-overlays": "npm:react-overlays@0.5.4",
+      "react-prop-types": "npm:react-prop-types@0.3.0",
+      "uncontrollable": "npm:uncontrollable@3.2.1",
+      "warning": "npm:warning@2.1.0"
+    },
     "npm:react-dom@0.14.0": {
       "react": "npm:react@0.14.0"
+    },
+    "npm:react-overlays@0.5.4": {
+      "classnames": "npm:classnames@2.2.3",
+      "dom-helpers": "npm:dom-helpers@2.4.0",
+      "react": "npm:react@0.14.0",
+      "react-dom": "npm:react-dom@0.14.0",
+      "react-prop-types": "npm:react-prop-types@0.2.2",
+      "warning": "npm:warning@2.1.0"
+    },
+    "npm:react-prop-types@0.2.2": {
+      "warning": "npm:warning@2.1.0"
+    },
+    "npm:react-prop-types@0.3.0": {
+      "warning": "npm:warning@2.1.0"
     },
     "npm:react-router@1.0.3": {
       "child_process": "github:jspm/nodelibs-child_process@0.1.0",
@@ -185,6 +218,11 @@ System.config({
     },
     "npm:ua-parser-js@0.7.9": {
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
+    "npm:uncontrollable@3.2.1": {
+      "invariant": "npm:invariant@2.2.0",
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "react": "npm:react@0.14.0"
     },
     "npm:util@0.10.3": {
       "inherits": "npm:inherits@2.0.1",
