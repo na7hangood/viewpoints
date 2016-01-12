@@ -9,9 +9,10 @@ export default class CommenterList extends React.Component {
 
   render () {
 
+    const self = this;
     const commenterNodes = this.props.commenters.map(function(commenter) {
       return (
-        <CommenterDisplay commenter={commenter} commenterSelected={this.props.commenterSelected} />
+        <CommenterDisplay commenter={commenter} commenterSelected={self.props.commenterSelected} key={commenter.id} />
       );
     });
 

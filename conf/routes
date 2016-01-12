@@ -7,6 +7,8 @@ GET        /logout                        controllers.Login.logout
 # API
 GET        /api/commenters                controllers.Api.getCommenters
 GET        /api/commenter/:id             controllers.Api.getCommenter(id: Long)
+PUT        /api/commenter                 controllers.Api.createCommenter
+PUT        /api/commenter/:id             controllers.Api.updateCommenter(id: Long)
 
 GET        /api/subjects                  controllers.Api.getSubjects
 GET        /api/subject/:id               controllers.Api.getSubject(id: Long)

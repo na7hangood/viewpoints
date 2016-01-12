@@ -21,16 +21,18 @@ export default class Commenters extends React.Component {
     });
   }
 
-  commenterSelected(id) {
-    console.log("commenter selected", id);
+  commenterSelected(commenter) {
+    this.setState({selectedCommenter: commenter});
   }
 
   showNewCommenterForm() {
     this.setState({selectedCommenter: {}});
   }
 
-  saveSelectedCommenter() {
-    console.log("will save", this.state.selectedCommenter);
+  saveSelectedCommenter(updated) {
+    viewpointsApi.saveCommenter(updated).then(res => {
+      this.fetchCommenters();
+    });
   }
 
   cancelCommenterEdit() {
@@ -38,6 +40,23 @@ export default class Commenters extends React.Component {
   }
 
   render () {
+    var editForm;
+
+    if (this.state.selectedCommenter) {
+      editForm = (
+        <CommenterEdit commenter={this.state.selectedCommenter}
+                       saveCommenter={this.saveSelectedCommenter.bind(this)}
+                       cancelCommenterEdit={this.cancelCommenterEdit.bind(this)}/>
+      );
+    } else {
+      editForm = (
+        <div>
+          <p>Select a commenter to edit, or add a new one</p>
+          <Button bsStyle="primary" onClick={this.showNewCommenterForm.bind(this)} >Add commenter</Button>
+        </div>
+      )
+    }
+
     return (
       <Grid>
         <Row className="show-grid">
@@ -46,9 +65,7 @@ export default class Commenters extends React.Component {
             <Button bsStyle="primary" onClick={this.showNewCommenterForm.bind(this)} >Add commenter</Button>
           </Col>
           <Col xs={12} md={8}>
-            <CommenterEdit commenter={this.state.selectedCommenter}
-                           saveCommenter={this.saveSelectedCommenter.bind(this)}
-                           cancelCommenterEdit={this.cancelCommenterEdit.bind(this)} />
+            {editForm}
           </Col>
         </Row>
       </Grid>

@@ -7,13 +7,17 @@ export default class CommenterDisplay extends React.Component {
     super(props);
   }
 
+  selectThisCommenter() {
+    this.props.commenterSelected(this.props.commenter);
+  }
+
   render () {
     const title = (
       <h3>{this.props.commenter.name}</h3>
     );
 
     return (
-      <Panel header={title} onClick={ this.props.commenterSelected(this.props.commenter.id) }>
+      <Panel header={title} onClick={ this.selectThisCommenter.bind(this) }>
         <Image src="this.props.commenter.imageUrl" responsive />
         <p>{this.props.commenter.description}</p>
       </Panel>
