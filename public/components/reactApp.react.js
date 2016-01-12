@@ -10,7 +10,6 @@ export default class ReactApp extends React.Component {
     return (
     <div className="container">
       <Header />
-      <h1>React is running.</h1>
       {this.props.children}
     </div>
     );
