@@ -1,5 +1,5 @@
 import React from 'react';
-import { Panel, Image } from 'react-bootstrap';
+import { Panel, Image, Grid, Row, Col } from 'react-bootstrap';
 
 export default class CommenterDisplay extends React.Component {
 
@@ -16,10 +16,19 @@ export default class CommenterDisplay extends React.Component {
       <h3>{this.props.commenter.name}</h3>
     );
 
+    var image;
+    if (this.props.commenter.imageUrl) {
+      image = (<Image src={this.props.commenter.imageUrl} responsive />);
+    } else {
+      image = (<Image src="http://tampabayparadeofhomes.com/wp-content/uploads/ngg_featured/placeholder-square.jpg" responsive />);
+    }
+
     return (
       <Panel header={title} onClick={ this.selectThisCommenter.bind(this) }>
-        <Image src="this.props.commenter.imageUrl" responsive />
-        <p>{this.props.commenter.description}</p>
+          <Row className="show-grid">
+            <Col xs={4} md={4}>{image}</Col>
+            <Col xs={8} md={8}>{this.props.commenter.description}</Col>
+          </Row>
       </Panel>
     );
   }

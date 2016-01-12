@@ -31,6 +31,7 @@ export default class Commenters extends React.Component {
 
   saveSelectedCommenter(updated) {
     viewpointsApi.saveCommenter(updated).then(res => {
+      this.setState({selectedCommenter: undefined});
       this.fetchCommenters();
     });
   }
