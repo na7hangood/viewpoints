@@ -11,6 +11,7 @@ import play.api.libs.json.{JsValue, JsPath, Format, Json}
 import scala.util.control.NonFatal
 
 case class Viewpoint(
+  id: Long,
   commenterId: Long,
   quote: String,
   link: Option[String],
@@ -33,7 +34,8 @@ case class Viewpoint(
 
 object Viewpoint {
   implicit val viewpointFormat: Format[Viewpoint] = (
-    (JsPath \ "commenterId").format[Long] and
+    (JsPath \ "id").format[Long] and
+      (JsPath \ "commenterId").format[Long] and
       (JsPath \ "quote").format[String] and
       (JsPath \ "link").formatNullable[String] and
       (JsPath \ "date").formatNullable[DateTime]
