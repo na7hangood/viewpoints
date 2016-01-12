@@ -1,7 +1,7 @@
 package controllers
 
 import model.Commenter
-import model.command.{UpdateCommenterCommand, CreateCommenterCommand}
+import model.command.{UpdateSubjectCommand, CreateSubjectCommand, UpdateCommenterCommand, CreateCommenterCommand}
 import model.repositories.{SubjectRepository, CommenterRepository}
 import play.api.libs.json.Json
 import play.api.mvc.Controller
@@ -43,6 +43,22 @@ object Api extends Controller with PanDomainAuthActions {
     SubjectRepository.getSubject(id) map { s =>
       Ok(Json.toJson(s))
     } getOrElse NotFound
+  }
+
+  def createSubject = AuthAction { req =>
+    req.body.asJson.map { json =>
+      val subject = json.as[CreateSubjectCommand].process
+      subject.map{ s => Ok(Json.toJson(s))}.getOrElse(InternalServerError)
+    }.getOrElse(BadRequest)
+  }
+
+  def updateSubject(id: Long) = AuthAction { req =>
+    CommenterRepository.getCommenter(id).map { _ =>
+      req.body.asJson.map { json =>
+        val subject = json.as[UpdateSubjectCommand].process
+        subject.map{ s => Ok(Json.toJson(s))}.getOrElse(InternalServerError)
+      }.getOrElse(BadRequest)
+    } getOrElse(NotFound)
   }
 
 }

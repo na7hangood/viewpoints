@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import SubjectList from './fragments/SubjectList.react'
+import SubjectEdit from './fragments/SubjectEdit.react'
 import viewpointsApi from '../util/viewpointsApi.js';
 
 export default class Subjects extends React.Component {
@@ -30,16 +31,14 @@ export default class Subjects extends React.Component {
 
   cancelSubjectEdit() {
     this.setState({selectedSubject: undefined});
+    this.fetchSubjects();
   }
 
   render () {
 
     if (this.state.selectedSubject) {
       return (
-        <div>
-          <p>form goes here</p>
-          <Button bsStyle="primary" onClick={this.cancelSubjectEdit.bind(this)} >cancel</Button>
-        </div>
+        <SubjectEdit subject={this.state.selectedSubject} cancelSubjectEdit={this.cancelSubjectEdit.bind(this)}/>
       );
     } else {
       return (

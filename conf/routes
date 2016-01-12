@@ -13,6 +13,9 @@ PUT        /api/commenter/:id             controllers.Api.updateCommenter(id: Lo
 GET        /api/subjects                  controllers.Api.getSubjects
 GET        /api/subject/:id               controllers.Api.getSubject(id: Long)
 
+PUT        /api/subject                   controllers.Api.createSubject
+PUT        /api/subject/:id               controllers.Api.updateSubject(id: Long)
+
 # Management
 GET        /management/healthcheck        controllers.Management.healthCheck
 
