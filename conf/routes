@@ -9,7 +9,7 @@ GET        /api/commenters                controllers.Api.getCommenters
 GET        /api/commenter/:id             controllers.Api.getCommenter(id: Long)
 
 GET        /api/subjects                  controllers.Api.getSubjects
-GET        /api/subject/:id               controllers.Api.getsubject(id: Long)
+GET        /api/subject/:id               controllers.Api.getSubject(id: Long)
 
 # Management
 GET        /management/healthcheck        controllers.Management.healthCheck
