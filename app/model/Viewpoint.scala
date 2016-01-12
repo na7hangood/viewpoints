@@ -2,6 +2,7 @@ package model
 
 import com.amazonaws.services.dynamodbv2.document.Item
 import com.gu.contentatom.thrift.atom.viewpoints.{Viewpoint => ThriftViewpoint}
+import model.repositories.CommenterRepository
 import org.joda.time.DateTime
 import play.api.Logger
 import play.api.libs.functional.syntax._
@@ -10,7 +11,7 @@ import play.api.libs.json.{JsValue, JsPath, Format, Json}
 import scala.util.control.NonFatal
 
 case class Viewpoint(
-  commenter: Commenter,
+  commenterId: Long,
   quote: String,
   link: Option[String],
   date: Option[DateTime]
@@ -19,6 +20,7 @@ case class Viewpoint(
   def toItem = Item.fromJSON(Json.toJson(this).toString())
 
   def toThrift: ThriftViewpoint = {
+    val commenter = CommenterRepository.getCommenter(commenterId) getOrElse { throw new RuntimeException(s"commenter $commenterId not found") }
     ThriftViewpoint(
       commenter = commenter.toThrift,
       quote = quote,
@@ -31,7 +33,7 @@ case class Viewpoint(
 
 object Viewpoint {
   implicit val viewpointFormat: Format[Viewpoint] = (
-    (JsPath \ "commenter").format[Commenter] and
+    (JsPath \ "commenterId").format[Long] and
       (JsPath \ "quote").format[String] and
       (JsPath \ "link").formatNullable[String] and
       (JsPath \ "date").formatNullable[DateTime]
