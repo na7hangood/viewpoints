@@ -19,6 +19,8 @@ object Api extends Controller with PanDomainAuthActions {
   }
 
   def createCommenter = AuthAction { req =>
+    implicit val user = req.user
+
     req.body.asJson.map { json =>
       json.as[CreateCommenterCommand].process
       NoContent
@@ -26,6 +28,8 @@ object Api extends Controller with PanDomainAuthActions {
   }
 
   def updateCommenter(id: Long) = AuthAction { req =>
+    implicit val user = req.user
+
     CommenterRepository.getCommenter(id).map { _ =>
       req.body.asJson.map { json =>
         val commenter = json.as[Commenter]
@@ -46,6 +50,8 @@ object Api extends Controller with PanDomainAuthActions {
   }
 
   def createSubject = AuthAction { req =>
+    implicit val user = req.user
+
     req.body.asJson.map { json =>
       val subject = json.as[CreateSubjectCommand].process
       subject.map{ s => Ok(Json.toJson(s))}.getOrElse(InternalServerError)
@@ -53,6 +59,8 @@ object Api extends Controller with PanDomainAuthActions {
   }
 
   def updateSubject(id: Long) = AuthAction { req =>
+    implicit val user = req.user
+
     SubjectRepository.getSubject(id).map { _ =>
       req.body.asJson.map { json =>
         val subject = json.as[UpdateSubjectCommand].process
@@ -62,6 +70,8 @@ object Api extends Controller with PanDomainAuthActions {
   }
 
   def createViewpoint(subjectId: Long) = AuthAction { req =>
+    implicit val user = req.user
+
     SubjectRepository.getSubject(subjectId).map { _ =>
       req.body.asJson.map { json =>
         val subject = json.as[CreateViewpointCommand].process
@@ -71,6 +81,8 @@ object Api extends Controller with PanDomainAuthActions {
   }
 
   def updateViewpoint(subjectId: Long, viewpointId: Long) = AuthAction { req =>
+    implicit val user = req.user
+
     SubjectRepository.getSubject(subjectId).map { _ =>
       req.body.asJson.map { json =>
         val subject = json.as[UpdateViewpointCommand].process

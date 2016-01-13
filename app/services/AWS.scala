@@ -63,9 +63,9 @@ class KinesisStreamProducer(streamName: String) {
     publishUpdate(key, ByteBuffer.wrap(data))
   }
 
-//  def publishUpdate(key: String, struct: ThriftStruct) {
-//    publishUpdate(key, ByteBuffer.wrap(ThriftSerializer.serializeToBytes(struct)))
-//  }
+  def publishUpdate(key: String, struct: ThriftStruct) {
+    publishUpdate(key, ByteBuffer.wrap(ThriftSerializer.serializeToBytes(struct, true)))
+  }
 
   def publishUpdate(key: String, dataBuffer: ByteBuffer) {
     AWS.Kinesis.putRecord(streamName, dataBuffer, key)

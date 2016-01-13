@@ -60,9 +60,9 @@ object App extends Controller with PanDomainAuthActions {
       Some(new DateTime(2016, 1, 10, 0, 0))
     )
 
-    val testSubject = Subject(123, "Gun laws", Some("http://www.theguardian.com"), List(testViewpointOne, testViewpointTwo), 1)
+    val testSubject = Subject(123, "Gun laws", Some("http://www.theguardian.com"), List(testViewpointOne, testViewpointTwo), 1, None, None, None)
 
-    Ok(views.html.Application.defaultRendering(testSubject, testCandidates))
+    Ok(views.html.Application.defaultRenderingPreview(testSubject, testCandidates))
   }
 
 }

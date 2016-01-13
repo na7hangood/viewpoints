@@ -1,9 +1,11 @@
 package model.command
 
+import com.gu.pandomainauth.model.User
 import model.{Viewpoint, DenormalisedSubject}
 import model.repositories.{Sequences, SubjectRepository}
 import play.api.libs.functional.syntax._
 import play.api.libs.json.{JsPath, Format}
+import services.AtomPublisher
 
 case class CreateViewpointCommand(
   subjectId: Long,
@@ -14,7 +16,7 @@ case class CreateViewpointCommand(
 
   override type T = DenormalisedSubject
 
-  override def process(): Option[T] = {
+  override def process()(implicit user: User): Option[T] = {
     val originalSubject = SubjectRepository.getSubject(subjectId).get
 
     val viewpoint = Viewpoint(
@@ -27,12 +29,13 @@ case class CreateViewpointCommand(
 
     val modifiedSubject = originalSubject.copy(
       viewpoints = originalSubject.viewpoints ::: viewpoint :: Nil,
-      revision = originalSubject.revision + 1
+      revision = originalSubject.revision + 1,
+      lastModified = Some(changeRecord(user))
     )
 
     val res = SubjectRepository.updateSubject(modifiedSubject)
 
-    //publish draft to go here
+    res foreach{ s => AtomPublisher.publishDraft(s) }
 
     res.map(_.denormalise)
   }

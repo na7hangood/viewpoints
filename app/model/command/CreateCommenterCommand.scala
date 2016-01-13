@@ -1,5 +1,6 @@
 package model.command
 
+import com.gu.pandomainauth.model.User
 import model.Commenter
 import model.repositories.{CommenterRepository, Sequences}
 import play.api.libs.functional.syntax._
@@ -15,7 +16,7 @@ case class CreateCommenterCommand(
 
   override type T = Commenter
 
-  override def process(): Option[T] = {
+  override def process()(implicit user: User): Option[T] = {
     val commenter = Commenter(
       id = Sequences.commenterId.getNextId,
       name = name,
