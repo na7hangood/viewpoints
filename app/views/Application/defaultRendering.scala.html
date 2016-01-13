@@ -24,6 +24,15 @@
         overflow: hidden;
     }
 
+        .viewpoints-atom a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .viewpoints-atom a:hover {
+            text-decoration: underline;
+        }
+
         .viewpoints-atom__header {
             width: 100%;
             padding-left: 24px;
@@ -118,20 +127,33 @@
 
 </style>
 
-<article class="viewpoints-atom">
+<article class="viewpoints-atom" data-subject-id="@subject.id" data-viewpoints-length="@subject.viewpoints.length">
 
     <header class="viewpoints-atom__header">
         <h2 class="viewpoints-atom__tagline">The issues</h2>
-        <h1 class="viewpoints-atom__viewpoint-title">@subject.name</h1>
+        @if(subject.link.isDefined) {
+            <a href="@subject.link.get">
+                <h1 class="viewpoints-atom__viewpoint-title">@subject.name</h1>
+            </a>
+        } else {
+            <h1 class="viewpoints-atom__viewpoint-title">@subject.name</h1>
+        }
     </header>
 
     @for((viewpoint, index) <- subject.viewpoints.zipWithIndex) {
         @defining(commenters.find(c => c.id == viewpoint.commenterId).get) { commenter =>
-            <section class="viewpoint@{ if(index % 2 != 0) " viewpoint--odd" }">
+            <section class="viewpoint@{ if(index % 2 != 0) " viewpoint--odd" }" data-viewpoint-id="@viewpoint.id" data-viewpoint-index="@index">
 
                 <div class="viewpoint__contents">
-                    <blockquote class="viewpoint__quote">@viewpoint.quote</blockquote>
-                    <cite class="viewpoint__candidate-name">@commenter.name<span class="viewpoint__candidate-title">@commenter.description</span></cite>
+                    @if(viewpoint.link.isDefined) {
+                        <a href="@viewpoint.link.get">
+                            <blockquote class="viewpoint__quote">@viewpoint.quote</blockquote>
+                        </a>
+                    } else {
+                        <blockquote class="viewpoint__quote">@viewpoint.quote</blockquote>
+                    }
+
+                    <cite class="viewpoint__candidate-name" data-commenter-id="@commenter.id">@commenter.name<span class="viewpoint__candidate-title">@commenter.description</span></cite>
 
                     @defining(DateTimeFormat.forPattern("d MMMM y")) { dateFormatter =>
                         <time class="viewpoint__date">@dateFormatter.print(viewpoint.date.get)</time>
