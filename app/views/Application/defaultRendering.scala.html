@@ -1,0 +1,151 @@
+<style>
+
+    body {
+        background-color: #ececec;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .viewpoints-atom {
+        width: 450px;
+        background-color: #fff;
+        overflow: hidden;
+    }
+
+        .viewpoints-atom__header {
+            width: 100%;
+            padding-left: 24px;
+        }
+
+        .viewpoints-atom__tagline {
+            background-color: #D60A23;
+            color: #fff;
+            width: 55%;
+            padding: 0 2px;
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .viewpoints-atom__viewpoint-title {
+            color: #0C4474;
+            margin: 0;
+            font-size: 28px;
+        }
+
+    .viewpoint {
+        position: relative;
+        width: 100%;
+        margin-top: 48px;
+        overflow: hidden;
+    }
+
+        .viewpoint__contents {
+            padding-bottom: 48px;
+            width: 70%;
+            display: inline-block;
+        }
+
+        .viewpoint__quote {
+            font-size: 22px;
+            margin: 0 24px;
+            width: 85%;
+            text-align: left;
+        }
+
+        .viewpoint__quote:before {
+            content: '"';
+        }
+
+        .viewpoint__quote:after {
+            content: '"';
+        }
+
+        .viewpoint__candidate-name {
+            color: #0C4474;
+            display: block;
+            margin: 0 24px 24px;
+            font-size: 22px;
+        }
+
+        .viewpoint__candidate-title {
+            display: block;
+            font-size: 18px;
+        }
+
+        .viewpoint__date {
+            background-color: #D60A23;
+            color: #fff;
+            display: block;
+            width: 100%;
+            line-height: 24px;
+            padding: 0 24px;
+        }
+
+        .viewpoint__candidate-image-container {
+            position: absolute;
+            right: -24px;
+            bottom: 0;
+            width: 60%;
+            border-bottom: 24px solid #D60A23;
+            text-align: right;
+        }
+
+        .viewpoint__candidate-image {
+            display : inline-block;
+        }
+
+    .viewpoint:nth-child(odd) {
+        text-align: right;
+    }
+
+    .viewpoint:nth-child(odd) .viewpoint__candidate-image-container {
+        right: auto;
+        left: -24px;
+        text-align: left;
+    }
+
+    /*.viewpoint:nth-child(odd) .viewpoint__date {*/
+        /*text-align: ;*/
+    /*}*/
+</style>
+
+<article class="viewpoints-atom">
+
+    <header class="viewpoints-atom__header">
+        <h2 class="viewpoints-atom__tagline">The issues</h2>
+        <h1 class="viewpoints-atom__viewpoint-title">Gun laws</h1>
+    </header>
+
+    <section class="viewpoint">
+
+        <div class="viewpoint__contents">
+            <blockquote class="viewpoint__quote">What is wrong with us, that we cannot stand up to the NRA and the gun lobby, and the gun manufacturers they represent?</blockquote>
+            <cite class="viewpoint__candidate-name">Hillary Clinton<span class="viewpoint__candidate-title">Former secretary of state</span></cite>
+
+            <time class="viewpoint__date">10 January 2016</time>
+        </div>
+
+        <aside class="viewpoint__candidate-image-container">
+            <img class="viewpoint__candidate-image" src="http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2016/1/12/1452598832111/HillaryClintonR.png" width="240" alt=""/>
+        </aside>
+
+    </section>
+
+    <section class="viewpoint">
+
+        <div class="viewpoint__contents">
+            <blockquote class="viewpoint__quote">Here’s another important way to fight crime – empower law-abiding gun owners to defend themselves.</blockquote>
+            <cite class="viewpoint__candidate-name">Donald Trump<span class="viewpoint__candidate-title">Real estate mogul</span></cite>
+
+            <time class="viewpoint__date">10 January 2016</time>
+        </div>
+
+        <aside class="viewpoint__candidate-image-container">
+            <img class="viewpoint__candidate-image" src="http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2016/1/12/1452598831853/DonaldTrumpL.png" width="240" alt=""/>
+        </aside>
+
+    </section>
+
+</article>

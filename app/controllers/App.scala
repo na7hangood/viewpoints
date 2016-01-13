@@ -32,4 +32,8 @@ object App extends Controller with PanDomainAuthActions {
     Ok(views.html.Application.hello("Hello world"))
   }
 
+  def defaultRenderTemp = AuthAction {
+    Ok(views.html.Application.defaultRendering())
+  }
+
 }
