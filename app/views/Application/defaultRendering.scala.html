@@ -1,3 +1,7 @@
+@(subject: model.Subject, commenters: List[model.Commenter])
+
+@import org.joda.time.format.DateTimeFormat
+
 <style>
 
     body {
@@ -96,56 +100,43 @@
             display : inline-block;
         }
 
-    .viewpoint:nth-child(odd) {
-        text-align: right;
-    }
+        .viewpoint:nth-child(odd) {
+            text-align: right;
+        }
 
-    .viewpoint:nth-child(odd) .viewpoint__candidate-image-container {
-        right: auto;
-        left: -24px;
-        text-align: left;
-    }
+        .viewpoint:nth-child(odd) .viewpoint__candidate-image-container {
+            right: auto;
+            left: -24px;
+            text-align: left;
+        }
 
-    /*.viewpoint:nth-child(odd) .viewpoint__date {*/
-        /*text-align: ;*/
-    /*}*/
 </style>
 
 <article class="viewpoints-atom">
 
     <header class="viewpoints-atom__header">
         <h2 class="viewpoints-atom__tagline">The issues</h2>
-        <h1 class="viewpoints-atom__viewpoint-title">Gun laws</h1>
+        <h1 class="viewpoints-atom__viewpoint-title">@subject.name</h1>
     </header>
 
-    <section class="viewpoint">
+    @for((viewpoint, index) <- subject.viewpoints.zipWithIndex) {
+        @defining(commenters.find(c => c.id == viewpoint.commenterId).get) { commenter =>
+            <section class="viewpoint@{ if(index % 2 != 0) " viewpoint--odd" }">
 
-        <div class="viewpoint__contents">
-            <blockquote class="viewpoint__quote">What is wrong with us, that we cannot stand up to the NRA and the gun lobby, and the gun manufacturers they represent?</blockquote>
-            <cite class="viewpoint__candidate-name">Hillary Clinton<span class="viewpoint__candidate-title">Former secretary of state</span></cite>
+                <div class="viewpoint__contents">
+                    <blockquote class="viewpoint__quote">@viewpoint.quote</blockquote>
+                    <cite class="viewpoint__candidate-name">@commenter.name<span class="viewpoint__candidate-title">@commenter.description</span></cite>
 
-            <time class="viewpoint__date">10 January 2016</time>
-        </div>
+                    @defining(DateTimeFormat.forPattern("d MMMM y")) { dateFormatter =>
+                        <time class="viewpoint__date">@dateFormatter.print(viewpoint.date.get)</time>
+                    }
+                </div>
 
-        <aside class="viewpoint__candidate-image-container">
-            <img class="viewpoint__candidate-image" src="http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2016/1/12/1452598832111/HillaryClintonR.png" width="240" alt=""/>
-        </aside>
+                <aside class="viewpoint__candidate-image-container">
+                    <img class="viewpoint__candidate-image" src="@commenter.imageUrl" width="240" alt=""/>
+                </aside>
 
-    </section>
-
-    <section class="viewpoint">
-
-        <div class="viewpoint__contents">
-            <blockquote class="viewpoint__quote">Here’s another important way to fight crime – empower law-abiding gun owners to defend themselves.</blockquote>
-            <cite class="viewpoint__candidate-name">Donald Trump<span class="viewpoint__candidate-title">Real estate mogul</span></cite>
-
-            <time class="viewpoint__date">10 January 2016</time>
-        </div>
-
-        <aside class="viewpoint__candidate-image-container">
-            <img class="viewpoint__candidate-image" src="http://static.guim.co.uk/sys-images/Guardian/Pix/pictures/2016/1/12/1452598831853/DonaldTrumpL.png" width="240" alt=""/>
-        </aside>
-
-    </section>
-
+            </section>
+        }
+    }
 </article>
