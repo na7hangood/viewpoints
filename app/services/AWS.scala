@@ -73,7 +73,6 @@ class KinesisStreamProducer(streamName: String) {
 }
 
 object KinesisStreams {
-//  lazy val tagUpdateStream = new KinesisStreamProducer(Config().tagUpdateStreamName)
-//  lazy val sectionUpdateStream = new KinesisStreamProducer(Config().sectionUpdateStreamName)
-//  lazy val taggingOperationsStream = new KinesisStreamProducer(Config().taggingOperationsStreamName)
+  lazy val liveAtomStream = new KinesisStreamProducer(Config().liveAtomStreamName)
+  lazy val previewAtomStream = new KinesisStreamProducer(Config().previewAtomStreamName)
 }
