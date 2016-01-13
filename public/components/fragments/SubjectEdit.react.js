@@ -13,16 +13,6 @@ export default class SubjectEdit extends React.Component {
     }
   }
 
-  //componentWillReceiveProps(nextProps) {
-  //  if (this.props.commenter !== nextProps.commenter) {
-  //    if (nextProps.commenter) {
-  //      this.state = {modifiedCommenter: Object.assign({}, nextProps.commenter)};
-  //    } else {
-  //      this.state = {modifiedCommenter: {}};
-  //    }
-  //  }
-  //}
-
   saveGeneralInformation() {
     viewpointsApi.saveSubjectGeneralInformation(this.state.modifiedSubject).then(res => {
       this.setState({modifiedSubject: res});
@@ -45,6 +35,10 @@ export default class SubjectEdit extends React.Component {
     this.setState({modifiedSubject: updated});
   }
 
+  disablePublish() {
+    return !(this.state.modifiedSubject.id && (this.state.modifiedSubject.viewpoints.length > 0));
+  }
+
   render () {
 
     if (!this.props.subject) {
@@ -59,7 +53,7 @@ export default class SubjectEdit extends React.Component {
               <ButtonToolbar>
                 <Button onClick={this.props.cancelSubjectEdit} >Back</Button>
                 <Button bsStyle="primary" onClick={this.saveGeneralInformation.bind(this)} >Save</Button>
-                <Button bsStyle="success" onClick={this.publishSubject.bind(this)} >Publish</Button>
+                <Button bsStyle="success" onClick={this.publishSubject.bind(this)} disabled={this.disablePublish()}>Publish</Button>
               </ButtonToolbar>
             </Col>
             <Col xs={9} md={9}>
