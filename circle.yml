@@ -26,9 +26,6 @@ dependencies:
     - npm install:
       pwd:
         public
-
-    # - npm run build
-    # - npm run build-icons
     - sbt test:compile
 
 test:
