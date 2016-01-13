@@ -1,7 +1,7 @@
 import React        from 'react';
 import { Route, IndexRoute } from 'react-router';
 
-import ReactApp     from '../components/ReactApp.react';
+import ReactApp     from '../components/reactApp.react';
 import Commenters   from '../components/Commenters.react';
 import Subjects     from '../components/Subjects.react';
 import Categories   from '../components/Categories.react';
