@@ -1,13 +1,14 @@
 import React from 'react';
 import { Grid, Row, Col, Panel, Button, ButtonToolbar, Input, ButtonInput } from 'react-bootstrap';
 import ViewpointList from './ViewpointList.react'
+import ViewpointEdit from './ViewpointEdit.react'
 import viewpointsApi from '../../util/viewpointsApi.js';
 
 export default class SubjectEdit extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {modifiedSubject: {}};
+    this.state = {modifiedSubject: {}, selectedViewpoint: undefined};
 
   }
 
@@ -47,14 +48,43 @@ export default class SubjectEdit extends React.Component {
     return !(this.state.modifiedSubject.id && (this.state.modifiedSubject.viewpoints.length > 0));
   }
 
-  selectViewpoint() {
-    console.log('viewpoint selected');
+  selectViewpoint(viewpoint) {
+    this.setState({selectedViewpoint: viewpoint});
+  }
+
+  showNewViewpointForm() {
+    this.setState({selectedViewpoint: {}});
+  }
+
+  saveSelectedViewpoint(viewpoint) {
+    console.log('viewpoint save', viewpoint);
+  }
+
+  cancelViewpointEdit() {
+    this.setState({selectedViewpoint: undefined});
   }
 
   render () {
 
     if (!this.props.subjectId) {
       return false;
+    }
+
+    var viewpointEditForm;
+
+    if (this.state.selectedViewpoint) {
+      viewpointEditForm = (
+        <ViewpointEdit viewpoint={this.state.selectedViewpoint}
+                       saveViewpoint={this.saveSelectedViewpoint.bind(this)}
+                       cancelViewpointEdit={this.cancelViewpointEdit.bind(this)}/>
+      );
+    } else {
+      viewpointEditForm = (
+        <div>
+          <p>Select a viewpoint to edit, or add a new one</p>
+          <Button bsStyle="primary" onClick={this.showNewViewpointForm.bind(this)} >Add viewpoint</Button>
+        </div>
+      )
     }
 
     return (
@@ -81,7 +111,7 @@ export default class SubjectEdit extends React.Component {
             <ViewpointList viewpoints={this.state.modifiedSubject.viewpoints} viewpointSelected={this.selectViewpoint.bind(this)} />
           </Col>
           <Col xs={6} md={6}>
-            <p>viewpoint list</p>
+            {viewpointEditForm}
           </Col>
           <Col xs={2} md={2}>
             <p>commenter picker</p>
