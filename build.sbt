@@ -7,7 +7,7 @@ name := "viewpoints"
 version := "1.0"
 
 lazy val dependencies = Seq(
-  "com.gu" %% "content-atom-model-scala" % "0.2.1-SNAPSHOT",
+  "com.gu" %% "content-atom-model-scala" % "0.2.2",
   "com.amazonaws" % "aws-java-sdk" % "1.10.33",
   "com.amazonaws" % "amazon-kinesis-client" % "1.6.1",
   "com.gu" %% "pan-domain-auth-play_2-4-0" % "0.2.8",
