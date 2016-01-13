@@ -1,0 +1,51 @@
+{
+  "defaultStacks": [
+    "flexible"
+  ],
+  "packages": {
+    "viewpoints": {
+      "type": "autoscaling",
+      "data": {
+        "port": 9000,
+        "bucket": "composer-dist",
+        "publicReadAcl": false
+      }
+    },
+    "viewpoints-cloudformation": {
+      "type": "cloud-formation",
+      "fileName": "cloudformation",
+      "data": {
+        "templatePath": "viewpoints.json",
+        "cloudFormationStackName": "Viewpoints",
+        "prependStackToCloudFormationStackName": false,
+        "templateParameters": {
+          "MachineImagesAMI": "ami-a09931d3"
+        }
+      }
+    }
+  },
+  "recipes": {
+    "default": {
+      "depends": [
+        "artifactUploadOnly",
+        "tagManagerrCloudformation",
+        "deployOnly"
+      ]
+    },
+    "deployOnly": {
+      "actionsPerHost": [
+        "viewpoints.deploy"
+      ]
+    },
+    "artifactUploadOnly": {
+      "actionsBeforeApp": [
+        "viewpoints.uploadArtifacts"
+      ]
+    },
+    "tagManagerrCloudformation": {
+      "actions": [
+        "viewpoints-cloudformation.updateStack"
+      ]
+    }
+  }
+}
