@@ -38,7 +38,7 @@ export default class Subjects extends React.Component {
 
     if (this.state.selectedSubject) {
       return (
-        <SubjectEdit subject={this.state.selectedSubject} cancelSubjectEdit={this.cancelSubjectEdit.bind(this)}/>
+        <SubjectEdit subjectId={this.state.selectedSubject.id} cancelSubjectEdit={this.cancelSubjectEdit.bind(this)}/>
       );
     } else {
       return (

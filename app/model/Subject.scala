@@ -26,6 +26,16 @@ case class Subject(
     )
   }
 
+  def denormalise: DenormalisedSubject = {
+    DenormalisedSubject(
+      id = id,
+      name = name,
+      link = link,
+      viewpoints = viewpoints.map(_.denormalise),
+      revision = revision
+    )
+  }
+
 }
 
 object Subject {
@@ -45,4 +55,22 @@ object Subject {
   }
 
   def fromJson(json: JsValue) = json.as[Subject]
+}
+
+case class DenormalisedSubject(
+                    id: Long,
+                    name: String,
+                    link: Option[String],
+                    viewpoints: List[DenormalisedViewpoint],
+                    revision: Long
+                    )
+
+object DenormalisedSubject {
+  implicit val denormalisedSubjectFormat: Format[DenormalisedSubject] = (
+    (JsPath \ "id").format[Long] and
+      (JsPath \ "name").format[String] and
+      (JsPath \ "link").formatNullable[String] and
+      (JsPath \ "viewpoints").format[List[DenormalisedViewpoint]] and
+      (JsPath \ "revision").format[Long]
+    )(DenormalisedSubject.apply, unlift(DenormalisedSubject.unapply))
 }

@@ -31,6 +31,13 @@ export default {
     });
   },
 
+  getSubject: (id) => {
+    return Reqwest({
+      url: '/api/subject/' + id,
+      method: 'get'
+    });
+  },
+
   saveSubjectGeneralInformation: (subject) => {
     var url;
     var command;

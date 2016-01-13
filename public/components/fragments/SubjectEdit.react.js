@@ -6,11 +6,18 @@ export default class SubjectEdit extends React.Component {
 
   constructor(props) {
     super(props);
-    if (props.subject) {
-      this.state = {modifiedSubject: Object.assign({}, props.subject)};
-    } else {
-      this.state = {modifiedSubject: {}};
-    }
+    this.state = {modifiedSubject: {}};
+
+  }
+
+  componentDidMount() {
+    this.loadSubject(this.props.subjectId);
+  }
+
+  loadSubject(id) {
+    viewpointsApi.getSubject(id).then(res => {
+      this.setState({modifiedSubject: res});
+    });
   }
 
   saveGeneralInformation() {
@@ -41,7 +48,7 @@ export default class SubjectEdit extends React.Component {
 
   render () {
 
-    if (!this.props.subject) {
+    if (!this.props.subjectId) {
       return false;
     }
 
@@ -64,7 +71,19 @@ export default class SubjectEdit extends React.Component {
             </Col>
           </Panel>
         </Row>
-        <Row></Row>
+        <Row>
+          <Col xs={4} md={4}>
+            <p>viewpoint list</p>
+          </Col>
+          <Col xs={6} md={6}>
+            <p>viewpoint list</p>
+          </Col>
+          <Col xs={2} md={2}>
+            <p>commenter picker</p>
+          </Col>
+
+
+        </Row>
 
       </Grid>
     );

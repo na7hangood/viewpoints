@@ -41,7 +41,7 @@ object Api extends Controller with PanDomainAuthActions {
 
   def getSubject(id: Long) = AuthAction {
     SubjectRepository.getSubject(id) map { s =>
-      Ok(Json.toJson(s))
+      Ok(Json.toJson(s.denormalise))
     } getOrElse NotFound
   }
 

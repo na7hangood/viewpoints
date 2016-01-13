@@ -1,6 +1,6 @@
 package model.command
 
-import model.Subject
+import model.{DenormalisedSubject, Subject}
 import model.repositories.{SubjectRepository, Sequences}
 import play.api.libs.functional.syntax._
 import play.api.libs.json.{JsPath, Format}
@@ -8,7 +8,7 @@ import play.api.libs.json.{JsPath, Format}
 
 case class CreateSubjectCommand(name: String, link: Option[String] = None) extends Command {
 
-  override type T = Subject
+  override type T = DenormalisedSubject
 
   override def process(): Option[T] = {
     val subject = Subject(
@@ -19,9 +19,11 @@ case class CreateSubjectCommand(name: String, link: Option[String] = None) exten
       revision = 1l
     )
 
-    SubjectRepository.updateSubject(subject)
+    val res = SubjectRepository.updateSubject(subject)
 
     //publish draft to go here
+
+    res.map(_.denormalise)
   }
 }
 
