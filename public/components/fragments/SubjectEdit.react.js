@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Row, Col, Panel, Button, ButtonToolbar, Input, ButtonInput } from 'react-bootstrap';
+import ViewpointList from './ViewpointList.react'
 import viewpointsApi from '../../util/viewpointsApi.js';
 
 export default class SubjectEdit extends React.Component {
@@ -46,6 +47,10 @@ export default class SubjectEdit extends React.Component {
     return !(this.state.modifiedSubject.id && (this.state.modifiedSubject.viewpoints.length > 0));
   }
 
+  selectViewpoint() {
+    console.log('viewpoint selected');
+  }
+
   render () {
 
     if (!this.props.subjectId) {
@@ -73,7 +78,7 @@ export default class SubjectEdit extends React.Component {
         </Row>
         <Row>
           <Col xs={4} md={4}>
-            <p>viewpoint list</p>
+            <ViewpointList viewpoints={this.state.modifiedSubject.viewpoints} viewpointSelected={this.selectViewpoint.bind(this)} />
           </Col>
           <Col xs={6} md={6}>
             <p>viewpoint list</p>
