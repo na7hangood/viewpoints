@@ -107,17 +107,12 @@ export default class SubjectEdit extends React.Component {
           </Panel>
         </Row>
         <Row>
-          <Col xs={4} md={4}>
+          <Col xs={3} md={3}>
             <ViewpointList viewpoints={this.state.modifiedSubject.viewpoints} viewpointSelected={this.selectViewpoint.bind(this)} />
           </Col>
-          <Col xs={6} md={6}>
-            {viewpointEditForm}
+          <Col xs={9} md={9}>
+            <Panel>{viewpointEditForm}</Panel>
           </Col>
-          <Col xs={2} md={2}>
-            <p>commenter picker</p>
-          </Col>
-
-
         </Row>
 
       </Grid>
