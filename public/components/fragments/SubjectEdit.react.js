@@ -57,7 +57,10 @@ export default class SubjectEdit extends React.Component {
   }
 
   saveSelectedViewpoint(viewpoint) {
-    console.log('viewpoint save', viewpoint);
+    viewpointsApi.saveViewpoint(this.state.modifiedSubject.id, viewpoint).then(res => {
+      this.setState({modifiedSubject: res});
+      this.setState({selectedViewpoint: undefined});
+    });
   }
 
   cancelViewpointEdit() {

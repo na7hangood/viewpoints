@@ -24,7 +24,7 @@ export default class ViewpointDisplay extends React.Component {
     }
 
     return (
-      <Panel header={title} onClick={ this.selectThisCommenter.bind(this) }>
+      <Panel header={title} onClick={ this.selectThisViewpoint.bind(this) }>
           <Row className="show-grid">
             <Col xs={4} md={4}>{image}</Col>
             <Col xs={8} md={8}>{this.props.viewpoint.quote}</Col>

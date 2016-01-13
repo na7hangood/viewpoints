@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListGroup } from 'react-bootstrap';
-import SubjectDisplay from './ViewpointDisplay.react';
+import ViewpointDisplay from './ViewpointDisplay.react';
 
 export default class ViewpointList extends React.Component {
 

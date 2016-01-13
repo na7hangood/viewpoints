@@ -1,7 +1,7 @@
 package controllers
 
 import model.Commenter
-import model.command.{UpdateSubjectCommand, CreateSubjectCommand, UpdateCommenterCommand, CreateCommenterCommand}
+import model.command._
 import model.repositories.{SubjectRepository, CommenterRepository}
 import play.api.libs.json.Json
 import play.api.mvc.Controller
@@ -53,7 +53,7 @@ object Api extends Controller with PanDomainAuthActions {
   }
 
   def updateSubject(id: Long) = AuthAction { req =>
-    CommenterRepository.getCommenter(id).map { _ =>
+    SubjectRepository.getSubject(id).map { _ =>
       req.body.asJson.map { json =>
         val subject = json.as[UpdateSubjectCommand].process
         subject.map{ s => Ok(Json.toJson(s))}.getOrElse(InternalServerError)
@@ -61,4 +61,21 @@ object Api extends Controller with PanDomainAuthActions {
     } getOrElse(NotFound)
   }
 
+  def createViewpoint(subjectId: Long) = AuthAction { req =>
+    SubjectRepository.getSubject(subjectId).map { _ =>
+      req.body.asJson.map { json =>
+        val subject = json.as[CreateViewpointCommand].process
+        subject.map{ s => Ok(Json.toJson(s))}.getOrElse(InternalServerError)
+      }.getOrElse(BadRequest)
+    } getOrElse(NotFound)
+  }
+
+  def updateViewpoint(subjectId: Long, viewpointId: Long) = AuthAction { req =>
+    SubjectRepository.getSubject(subjectId).map { _ =>
+      req.body.asJson.map { json =>
+        val subject = json.as[UpdateViewpointCommand].process
+        subject.map{ s => Ok(Json.toJson(s))}.getOrElse(InternalServerError)
+      }.getOrElse(BadRequest)
+    } getOrElse(NotFound)
+  }
 }

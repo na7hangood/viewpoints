@@ -55,5 +55,24 @@ export default {
       contentType: 'application/json',
       method: 'put'
     });
+  },
+
+  saveViewpoint: (subjectId, viewpoint) => {
+    var url;
+    var command;
+    if (viewpoint.id) {
+      url = '/api/subject/' + subjectId + '/viewpoint/' + viewpoint.id;
+      command = {subjectId: subjectId, viewpointId: viewpoint.id, commenterId: viewpoint.commenter.id, quote: viewpoint.quote, link: viewpoint.link};
+    } else {
+      url = '/api/subject/' + subjectId + '/viewpoint';
+      command = {subjectId: subjectId, commenterId: viewpoint.commenter.id, quote: viewpoint.quote, link: viewpoint.link};
+    }
+
+    return Reqwest({
+      url: url,
+      data: JSON.stringify(command),
+      contentType: 'application/json',
+      method: 'put'
+    });
   }
 }

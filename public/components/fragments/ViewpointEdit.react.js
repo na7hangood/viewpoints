@@ -8,18 +8,19 @@ export default class ViewpointEdit extends React.Component {
   constructor(props) {
     super(props);
     if (props.viewpoint) {
-      this.state = {modifiedViewpoint: Object.assign({}, props.commenter), showCommenterPicker: false, commenters: []};
+      this.state = {modifiedViewpoint: Object.assign({}, props.viewpoint), showCommenterPicker: false, commenters: []};
     } else {
       this.state = {modifiedViewpoint: {}, showCommenterPicker: false, commenters: []};
     }
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log('viewpoint editor getting props', this.props.viewpoint, nextProps.viewpoint);
     if (this.props.viewpoint !== nextProps.viewpoint) {
       if (nextProps.viewpoint) {
-        this.state = {modifiedViewpoint: Object.assign({}, nextProps.viewpoint), showCommenterPicker: false, commenters: []};
+        this.setState({modifiedViewpoint: Object.assign({}, nextProps.viewpoint), showCommenterPicker: false});
       } else {
-        this.state = {modifiedViewpoint: {}, showCommenterPicker: false, commenters: []};
+        this.setState({modifiedViewpoint: {}, showCommenterPicker: false});
       }
     }
   }
@@ -62,18 +63,6 @@ export default class ViewpointEdit extends React.Component {
     this.hideCommenterPicker();
   }
 
-  //updateImage(e) {
-  //  const updated = this.state.modifiedCommenter;
-  //  updated.imageUrl = e.target.value;
-  //  this.setState({modifiedCommenter: updated});
-  //}
-  //
-  //updateParty(e) {
-  //  const updated = this.state.modifiedCommenter;
-  //  updated.party = e.target.value;
-  //  this.setState({modifiedCommenter: updated});
-  //}
-
   saveModifications() {
     this.props.saveViewpoint(this.state.modifiedViewpoint);
   }
@@ -100,13 +89,12 @@ export default class ViewpointEdit extends React.Component {
     }
 
     var commenterPicker;
+
     if(this.state.showCommenterPicker) {
       commenterPicker= (<CommenterList commenters={this.state.commenters} commenterSelected={this.commenterPicked.bind(this)} />);
     } else {
       commenterPicker = (<div></div>);
     }
-
-
     return (
 
         <Row className="show-grid">

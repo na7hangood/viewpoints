@@ -10,6 +10,7 @@ object Sequences {
 
   val commenterId = new DynamoSequence(Dynamo.sequenceTable, "commenterId")
   val subjectId = new DynamoSequence(Dynamo.sequenceTable, "subjectId")
+  val viewpointId = new DynamoSequence(Dynamo.sequenceTable, "viewpointId")
 }
 
 class DynamoSequence(sequenceTable: Table, sequenceName: String) {

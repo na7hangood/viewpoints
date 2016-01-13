@@ -17,6 +17,9 @@ GET        /api/subject/:id               controllers.Api.getSubject(id: Long)
 PUT        /api/subject                   controllers.Api.createSubject
 PUT        /api/subject/:id               controllers.Api.updateSubject(id: Long)
 
+PUT        /api/subject/:subjectId/viewpoint                    controllers.Api.createViewpoint(subjectId: Long)
+PUT        /api/subject/:subjectId/viewpoint/:viewpointId       controllers.Api.updateViewpoint(subjectId: Long, viewpointId: Long)
+
 # Management
 GET        /management/healthcheck        controllers.Management.healthCheck
 
