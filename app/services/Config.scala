@@ -42,8 +42,8 @@ class DevConfig extends Config {
   override def publishedSubjectTableName = "viewpoints-published-subject-dev"
   override def sequenceTableName = "viewpoints-sequence-dev"
 
-  override def liveAtomStreamName = "atom-viewpoints-live-CODE"
-  override def previewAtomStreamName = "atom-viewpoints-preview-CODE"
+  override def liveAtomStreamName = "content-atom-events-live-CODE"
+  override def previewAtomStreamName = "content-atom-events-preview-CODE"
 
   override def logShippingStreamName = Some("elk-CODE-KinesisStream-M03ERGK5PVD9")
   override def pandaDomain: String = "local.dev-gutools.co.uk"
@@ -56,8 +56,8 @@ class CodeConfig extends Config {
   override def publishedSubjectTableName = "viewpoints-published-subject-dev"
   override def sequenceTableName = "viewpoints-sequence-dev"
 
-  override def liveAtomStreamName = "atom-viewpoints-live-CODE"
-  override def previewAtomStreamName = "atom-viewpoints-preview-CODE"
+  override def liveAtomStreamName = "content-atom-events-live-CODE"
+  override def previewAtomStreamName = "content-atom-events-preview-CODE"
 
   override def logShippingStreamName = Some("elk-PROD-KinesisStream-1PYU4KS1UEQA")
   override def pandaDomain: String = "code.dev-gutools.co.uk"
@@ -70,8 +70,8 @@ class ProdConfig extends Config {
   override def publishedSubjectTableName = "viewpoints-published-subject-prod"
   override def sequenceTableName = "viewpoints-sequence-prod"
 
-  override def liveAtomStreamName = "atom-viewpoints-live-PROD"
-  override def previewAtomStreamName = "atom-viewpoints-preview-PROD"
+  override def liveAtomStreamName = "content-atom-events-live-PROD"
+  override def previewAtomStreamName = "content-atom-events-preview-PROD"
 
   override def logShippingStreamName = Some("elk-PROD-KinesisStream-1PYU4KS1UEQA")
   override def pandaDomain: String = "gutools.co.uk"
