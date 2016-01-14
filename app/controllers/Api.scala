@@ -90,4 +90,13 @@ object Api extends Controller with PanDomainAuthActions {
       }.getOrElse(BadRequest)
     } getOrElse(NotFound)
   }
+
+  def publishSubject(subjectId: Long) = AuthAction { req =>
+    implicit val user = req.user
+
+    SubjectRepository.getSubject(subjectId).map { s =>
+      val res = new PublishSubjectCommand(s).process()
+      res.map{ s => Ok(Json.toJson(s))}.getOrElse(InternalServerError)
+    } getOrElse(NotFound)
+  }
 }

@@ -74,5 +74,12 @@ export default {
       contentType: 'application/json',
       method: 'put'
     });
+  },
+
+  publishSubject: (subjectId) => {
+    return Reqwest({
+      url: '/api/subject/' + subjectId + '/publish',
+      method: 'post'
+    });
   }
 }
