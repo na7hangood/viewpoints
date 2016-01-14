@@ -3,6 +3,7 @@ package model.command
 import com.gu.pandomainauth.model.User
 import model.{Viewpoint, DenormalisedSubject}
 import model.repositories.{Sequences, SubjectRepository}
+import org.joda.time.DateTime
 import play.api.libs.functional.syntax._
 import play.api.libs.json.{JsPath, Format}
 import services.AtomPublisher
@@ -11,7 +12,8 @@ case class CreateViewpointCommand(
   subjectId: Long,
   commenterId: Long,
   quote: String,
-  link: Option[String]
+  link: Option[String],
+  date: Option[DateTime]
  ) extends Command {
 
   override type T = DenormalisedSubject
@@ -24,7 +26,7 @@ case class CreateViewpointCommand(
       commenterId = commenterId,
       quote = quote,
       link = link,
-      date = None
+      date = date
     )
 
     val modifiedSubject = originalSubject.copy(
@@ -46,6 +48,7 @@ object CreateViewpointCommand {
     (JsPath \ "subjectId").format[Long] and
       (JsPath \ "commenterId").format[Long] and
       (JsPath \ "quote").format[String] and
-      (JsPath \ "link").formatNullable[String]
+      (JsPath \ "link").formatNullable[String] and
+      (JsPath \ "date").formatNullable[DateTime]
     )(CreateViewpointCommand.apply, unlift(CreateViewpointCommand.unapply))
 }

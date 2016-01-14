@@ -20,6 +20,7 @@ System.config({
     "core-js": "npm:core-js@1.2.2",
     "react": "npm:react@0.14.0",
     "react-bootstrap": "npm:react-bootstrap@0.28.2",
+    "react-bootstrap-datetimepicker": "npm:react-bootstrap-datetimepicker@0.0.22",
     "react-dom": "npm:react-dom@0.14.0",
     "react-router": "npm:react-router@1.0.3",
     "reqwest": "github:ded/reqwest@2.0.5",
@@ -130,6 +131,9 @@ System.config({
       "stream": "github:jspm/nodelibs-stream@0.1.0",
       "util": "github:jspm/nodelibs-util@0.1.0"
     },
+    "npm:moment@2.11.1": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
     "npm:path-browserify@0.0.0": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
@@ -142,6 +146,12 @@ System.config({
     },
     "npm:query-string@3.0.0": {
       "strict-uri-encode": "npm:strict-uri-encode@1.1.0"
+    },
+    "npm:react-bootstrap-datetimepicker@0.0.22": {
+      "babel-runtime": "npm:babel-runtime@5.8.25",
+      "classnames": "npm:classnames@2.2.3",
+      "moment": "npm:moment@2.11.1",
+      "react": "npm:react@0.14.0"
     },
     "npm:react-bootstrap@0.28.2": {
       "babel-runtime": "npm:babel-runtime@5.8.25",

@@ -3,6 +3,7 @@ package model.command
 import com.gu.pandomainauth.model.User
 import model.{Viewpoint, DenormalisedSubject}
 import model.repositories.{Sequences, SubjectRepository}
+import org.joda.time.DateTime
 import play.api.libs.functional.syntax._
 import play.api.libs.json.{JsPath, Format}
 import services.AtomPublisher
@@ -13,7 +14,8 @@ case class UpdateViewpointCommand (
   viewpointId: Long,
   commenterId: Long,
   quote: String,
-  link: Option[String]
+  link: Option[String],
+  date: Option[DateTime]
   ) extends Command {
 
   override type T = DenormalisedSubject
@@ -21,21 +23,14 @@ case class UpdateViewpointCommand (
   override def process()(implicit user: User): Option[T] = {
     val originalSubject = SubjectRepository.getSubject(subjectId).get
 
-    val viewpoint = Viewpoint(
-      id = Sequences.viewpointId.getNextId,
-      commenterId = commenterId,
-      quote = quote,
-      link = link,
-      date = None
-    )
-
     val modifiedSubject = originalSubject.copy(
       viewpoints = originalSubject.viewpoints.map { vp =>
         if (vp.id == viewpointId) {
           vp.copy(
             commenterId = commenterId,
             quote = quote,
-            link = link
+            link = link,
+            date = date
           )
         } else {
           vp
@@ -59,7 +54,8 @@ object UpdateViewpointCommand {
       (JsPath \ "viewpointId").format[Long] and
       (JsPath \ "commenterId").format[Long] and
       (JsPath \ "quote").format[String] and
-      (JsPath \ "link").formatNullable[String]
+      (JsPath \ "link").formatNullable[String] and
+      (JsPath \ "date").formatNullable[DateTime]
     )(UpdateViewpointCommand.apply, unlift(UpdateViewpointCommand.unapply))
 }
 

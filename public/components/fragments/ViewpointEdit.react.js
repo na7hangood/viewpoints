@@ -1,5 +1,6 @@
 import React from 'react';
 import { Panel, Row, Col, Input, ButtonInput, FormControls } from 'react-bootstrap';
+import DateTimeField from 'react-bootstrap-datetimepicker';
 import CommenterList from './CommenterList.react'
 import viewpointsApi from '../../util/viewpointsApi.js';
 
@@ -47,6 +48,12 @@ export default class ViewpointEdit extends React.Component {
     this.setState({modifiedViewpoint: updated});
   }
 
+  updateDate(dt) {
+    const updated = this.state.modifiedViewpoint;
+    updated.date = parseInt(dt, 10);
+    this.setState({modifiedViewpoint: updated});
+  }
+
   showCommenterPicker() {
     this.setState({showCommenterPicker: true});
   }
@@ -65,6 +72,15 @@ export default class ViewpointEdit extends React.Component {
 
   saveModifications() {
     this.props.saveViewpoint(this.state.modifiedViewpoint);
+  }
+
+  renderDatePicker() {
+    if(this.state.modifiedViewpoint.date) {
+      return (<DateTimeField mode="date" dateTime={this.state.modifiedViewpoint.date} onChange={this.updateDate.bind(this)} />);
+    } else {
+      console.log("rendering defualt date picker");
+      return (<DateTimeField mode="date" defaultText="" dateTime={this.state.modifiedViewpoint.date} onChange={this.updateDate.bind(this)} />);
+    }
   }
 
   render() {
@@ -103,6 +119,9 @@ export default class ViewpointEdit extends React.Component {
               {commenterNode}
               <Input type="textarea" label="Quote" value={this.state.modifiedViewpoint.quote} labelClassName="col-xs-2" wrapperClassName="col-xs-10" onChange={this.updateQuote.bind(this)}/>
               <Input type="text" label="Link" value={this.state.modifiedViewpoint.link} labelClassName="col-xs-2" wrapperClassName="col-xs-10" onChange={this.updateLink.bind(this)}/>
+              <Input label="Date" label="Date" labelClassName="col-xs-2" wrapperClassName="col-xs-10">
+                {this.renderDatePicker()}
+              </Input>
               <ButtonInput bsStyle="primary" onClick={this.saveModifications.bind(this)} wrapperClassName="col-xs-offset-2 col-xs-10">Save viewpoint</ButtonInput>
               <ButtonInput bsStyle="primary" onClick={this.props.cancelViewpointEdit} wrapperClassName="col-xs-offset-2 col-xs-10">Cancel</ButtonInput>
             </form>
