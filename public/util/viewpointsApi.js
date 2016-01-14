@@ -62,10 +62,21 @@ export default {
     var command;
     if (viewpoint.id) {
       url = '/api/subject/' + subjectId + '/viewpoint/' + viewpoint.id;
-      command = {subjectId: subjectId, viewpointId: viewpoint.id, commenterId: viewpoint.commenter.id, quote: viewpoint.quote, link: viewpoint.link};
+      command = {
+        subjectId: subjectId,
+        viewpointId: viewpoint.id,
+        commenterId: viewpoint.commenter.id,
+        quote: viewpoint.quote,
+        link: viewpoint.link,
+        date: viewpoint.date};
     } else {
       url = '/api/subject/' + subjectId + '/viewpoint';
-      command = {subjectId: subjectId, commenterId: viewpoint.commenter.id, quote: viewpoint.quote, link: viewpoint.link};
+      command = {
+        subjectId: subjectId,
+        commenterId: viewpoint.commenter.id,
+        quote: viewpoint.quote,
+        link: viewpoint.link,
+        date: viewpoint.date};
     }
 
     return Reqwest({
