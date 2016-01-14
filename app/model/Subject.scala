@@ -2,6 +2,7 @@ package model
 
 import com.amazonaws.services.dynamodbv2.document.Item
 import com.gu.contentatom.thrift.atom.viewpoints.ViewpointsAtom
+import org.joda.time.DateTime
 import play.api.Logger
 import play.api.libs.functional.syntax._
 import play.api.libs.json.{JsValue, JsPath, Format, Json}
@@ -14,7 +15,10 @@ case class Subject(
   name: String,
   link: Option[String],
   viewpoints: List[Viewpoint],
-  revision: Long
+  revision: Long,
+  lastModified: Option[ChangeRecord],
+  created: Option[ChangeRecord],
+  published: Option[ChangeRecord]
 ) {
   def toItem = Item.fromJSON(Json.toJson(this).toString())
 
@@ -32,7 +36,10 @@ case class Subject(
       name = name,
       link = link,
       viewpoints = viewpoints.map(_.denormalise),
-      revision = revision
+      revision = revision,
+      lastModified = lastModified,
+      created = created,
+      published = published
     )
   }
 
@@ -41,10 +48,13 @@ case class Subject(
 object Subject {
   implicit val subjectFormat: Format[Subject] = (
     (JsPath \ "id").format[Long] and
-    (JsPath \ "name").format[String] and
+      (JsPath \ "name").format[String] and
       (JsPath \ "link").formatNullable[String] and
       (JsPath \ "viewpoints").format[List[Viewpoint]] and
-      (JsPath \ "revision").format[Long]
+      (JsPath \ "revision").format[Long] and
+      (JsPath \ "lastModified").formatNullable[ChangeRecord] and
+      (JsPath \ "created").formatNullable[ChangeRecord] and
+      (JsPath \ "published").formatNullable[ChangeRecord]
     )(Subject.apply, unlift(Subject.unapply))
 
   def fromItem(item: Item) = try {
@@ -62,8 +72,11 @@ case class DenormalisedSubject(
                     name: String,
                     link: Option[String],
                     viewpoints: List[DenormalisedViewpoint],
-                    revision: Long
-                    )
+                    revision: Long,
+                    lastModified: Option[ChangeRecord],
+                    created: Option[ChangeRecord],
+                    published: Option[ChangeRecord]
+)
 
 object DenormalisedSubject {
   implicit val denormalisedSubjectFormat: Format[DenormalisedSubject] = (
@@ -71,6 +84,9 @@ object DenormalisedSubject {
       (JsPath \ "name").format[String] and
       (JsPath \ "link").formatNullable[String] and
       (JsPath \ "viewpoints").format[List[DenormalisedViewpoint]] and
-      (JsPath \ "revision").format[Long]
+      (JsPath \ "revision").format[Long] and
+      (JsPath \ "lastModified").formatNullable[ChangeRecord] and
+      (JsPath \ "created").formatNullable[ChangeRecord] and
+      (JsPath \ "published").formatNullable[ChangeRecord]
     )(DenormalisedSubject.apply, unlift(DenormalisedSubject.unapply))
 }

@@ -63,9 +63,9 @@ class KinesisStreamProducer(streamName: String) {
     publishUpdate(key, ByteBuffer.wrap(data))
   }
 
-//  def publishUpdate(key: String, struct: ThriftStruct) {
-//    publishUpdate(key, ByteBuffer.wrap(ThriftSerializer.serializeToBytes(struct)))
-//  }
+  def publishUpdate(key: String, struct: ThriftStruct) {
+    publishUpdate(key, ByteBuffer.wrap(ThriftSerializer.serializeToBytes(struct, true)))
+  }
 
   def publishUpdate(key: String, dataBuffer: ByteBuffer) {
     AWS.Kinesis.putRecord(streamName, dataBuffer, key)
@@ -73,7 +73,6 @@ class KinesisStreamProducer(streamName: String) {
 }
 
 object KinesisStreams {
-//  lazy val tagUpdateStream = new KinesisStreamProducer(Config().tagUpdateStreamName)
-//  lazy val sectionUpdateStream = new KinesisStreamProducer(Config().sectionUpdateStreamName)
-//  lazy val taggingOperationsStream = new KinesisStreamProducer(Config().taggingOperationsStreamName)
+  lazy val liveAtomStream = new KinesisStreamProducer(Config().liveAtomStreamName)
+  lazy val previewAtomStream = new KinesisStreamProducer(Config().previewAtomStreamName)
 }

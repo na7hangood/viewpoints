@@ -22,4 +22,10 @@ object SubjectRepository {
   }
 
   def loadAllSubjects = Dynamo.subjectTable.scan().map(Subject.fromItem)
+
+  def getSubjectsWithCommenter(commenterId: Long) = {
+    loadAllSubjects.filter{s =>
+      s.viewpoints.exists{vp => vp.commenterId == commenterId}
+    }.toList
+  }
 }
