@@ -20,10 +20,10 @@ case class CreateCommenterCommand(
     val commenter = Commenter(
       id = Sequences.commenterId.getNextId,
       name = name,
-      imageUrl = imageUrl,
-      description = description,
-      party = party,
-      category = category
+      imageUrl = sanitise(imageUrl),
+      description = sanitise(description),
+      party = sanitise(party),
+      category = sanitise(category)
     )
 
     CommenterRepository.updateCommenter(commenter)

@@ -25,7 +25,7 @@ case class CreateViewpointCommand(
       id = Sequences.viewpointId.getNextId,
       commenterId = commenterId,
       quote = quote,
-      link = link,
+      link = sanitise(link),
       date = date
     )
 

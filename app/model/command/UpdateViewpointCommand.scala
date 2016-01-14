@@ -29,7 +29,7 @@ case class UpdateViewpointCommand (
           vp.copy(
             commenterId = commenterId,
             quote = quote,
-            link = link,
+            link = sanitise(link),
             date = date
           )
         } else {

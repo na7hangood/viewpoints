@@ -15,7 +15,7 @@ case class UpdateSubjectCommand(id: Long, name: String, link: Option[String] = N
     val originalSubject = SubjectRepository.getSubject(id).get
     val modifiedSubject = originalSubject.copy(
       name = name,
-      link = link,
+      link = sanitise(link),
       revision = originalSubject.revision + 1,
       lastModified = Some(changeRecord(user))
     )
