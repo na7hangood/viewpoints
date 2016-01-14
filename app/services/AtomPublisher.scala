@@ -8,11 +8,11 @@ import play.twirl.api.Html
 object AtomPublisher {
 
   def publishDraft(subject: Subject): Unit = {
-    //KinesisStreams.previewAtomStream.publishUpdate(subject.id.toString, updateEvent(subject))
+    KinesisStreams.previewAtomStream.publishUpdate(subject.id.toString, updateEvent(subject))
   }
 
   def publishLive(subject: Subject): Unit = {
-    //KinesisStreams.liveAtomStream.publishUpdate(subject.id.toString, updateEvent(subject))
+    KinesisStreams.liveAtomStream.publishUpdate(subject.id.toString, updateEvent(subject))
   }
 
   private def updateEvent(subject: Subject): ContentAtomEvent = {
