@@ -71,6 +71,10 @@ export default class SubjectEdit extends React.Component {
     this.setState({selectedViewpoint: undefined});
   }
 
+  previewLink() {
+    return '/preview/' + this.state.modifiedSubject.id;
+  }
+
   render () {
 
     //if (!this.props.subjectId) {
@@ -123,6 +127,9 @@ export default class SubjectEdit extends React.Component {
             <Col xs={3} md={3}>
               <ButtonToolbar>
                 <Button onClick={this.props.cancelSubjectEdit} >Back</Button>
+                <Button href={this.previewLink()} target="_blank">Preview</Button>
+              </ButtonToolbar>
+              <ButtonToolbar>
                 <Button bsStyle="primary" onClick={this.saveGeneralInformation.bind(this)} >Save</Button>
                 <Button bsStyle="success" onClick={this.publishSubject.bind(this)} disabled={this.disablePublish()}>Publish</Button>
               </ButtonToolbar>

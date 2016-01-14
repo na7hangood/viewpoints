@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroupItem } from 'react-bootstrap';
+import { ListGroupItem, Button, ButtonToolbar } from 'react-bootstrap';
 
 export default class SubjectDisplay extends React.Component {
 
@@ -11,22 +11,20 @@ export default class SubjectDisplay extends React.Component {
     this.props.subjectSelected(this.props.subject);
   }
 
+  previewLink() {
+    return '/preview/' + this.props.subject.id;
+  }
+
   render () {
 
     return (
-      <ListGroupItem header={this.props.subject.name} onClick={this.selectThisSubject.bind(this)}>
+      <ListGroupItem header={this.props.subject.name} >
+        <ButtonToolbar>
+          <Button href={this.previewLink()} target="_blank">Preview</Button>
+          <Button onClick={this.selectThisSubject.bind(this)} bsStyle="primary">Edit</Button>
+        </ButtonToolbar>
         {this.props.subject.viewpoints.length} viewpoints
       </ListGroupItem>
     );
   }
 }
-
-/*
-
- id: Long,
- name: String,
- imageUrl: Option[String],
- description: Option[String],
- party: Option[String],
- category: Option[String]
- */
