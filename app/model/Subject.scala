@@ -30,6 +30,14 @@ case class Subject(
     )
   }
 
+  def state = {
+    published match {
+      case None => "Draft"
+      case Some(ChangeRecord(dt, _)) if (dt == lastModified.map(_.date).getOrElse(DateTime.now)) => "Live"
+      case _ => "Live with unlaunched changes"
+    }
+  }
+
   def denormalise: DenormalisedSubject = {
     DenormalisedSubject(
       id = id,
@@ -39,7 +47,8 @@ case class Subject(
       revision = revision,
       lastModified = lastModified,
       created = created,
-      published = published
+      published = published,
+      state = state
     )
   }
 
@@ -75,7 +84,8 @@ case class DenormalisedSubject(
                     revision: Long,
                     lastModified: Option[ChangeRecord],
                     created: Option[ChangeRecord],
-                    published: Option[ChangeRecord]
+                    published: Option[ChangeRecord],
+                    state: String
 )
 
 object DenormalisedSubject {
@@ -87,6 +97,7 @@ object DenormalisedSubject {
       (JsPath \ "revision").format[Long] and
       (JsPath \ "lastModified").formatNullable[ChangeRecord] and
       (JsPath \ "created").formatNullable[ChangeRecord] and
-      (JsPath \ "published").formatNullable[ChangeRecord]
+      (JsPath \ "published").formatNullable[ChangeRecord] and
+      (JsPath \ "state").format[String]
     )(DenormalisedSubject.apply, unlift(DenormalisedSubject.unapply))
 }

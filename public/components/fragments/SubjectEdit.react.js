@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col, Panel, Button, ButtonToolbar, Input, ButtonInput } from 'react-bootstrap';
+import { Grid, Row, Col, Panel, Button, ButtonToolbar, Input, ButtonInput, FormControls } from 'react-bootstrap';
 import ViewpointList from './ViewpointList.react'
 import ViewpointEdit from './ViewpointEdit.react'
 import viewpointsApi from '../../util/viewpointsApi.js';
@@ -13,7 +13,9 @@ export default class SubjectEdit extends React.Component {
   }
 
   componentDidMount() {
-    this.loadSubject(this.props.subjectId);
+    if(this.props.subjectId) {
+      this.loadSubject(this.props.subjectId);
+    }
   }
 
   loadSubject(id) {
@@ -71,8 +73,30 @@ export default class SubjectEdit extends React.Component {
 
   render () {
 
-    if (!this.props.subjectId) {
-      return false;
+    //if (!this.props.subjectId) {
+    //  return false;
+    //}
+
+    var statusElement;
+    if (this.state.modifiedSubject.id) {
+      statusElement = (
+        <FormControls.Static label="State" labelClassName="col-xs-2" wrapperClassName="col-xs-10">{this.state.modifiedSubject.state}</FormControls.Static>
+      );
+    } else {
+      statusElement = (
+        <FormControls.Static label="State" labelClassName="col-xs-2" wrapperClassName="col-xs-10">Creating</FormControls.Static>
+      );
+    }
+
+    var embedElement;
+    if (this.state.modifiedSubject.id) {
+      embedElement = (
+        <FormControls.Static label="Embed string" labelClassName="col-xs-2" wrapperClassName="col-xs-10">{this.state.modifiedSubject.id}</FormControls.Static>
+      );
+    } else {
+      embedElement = (
+        <FormControls.Static label="Embed string" labelClassName="col-xs-2" wrapperClassName="col-xs-10">Creating</FormControls.Static>
+      );
     }
 
     var viewpointEditForm;
@@ -89,7 +113,7 @@ export default class SubjectEdit extends React.Component {
           <p>Select a viewpoint to edit, or add a new one</p>
           <Button bsStyle="primary" onClick={this.showNewViewpointForm.bind(this)} >Add viewpoint</Button>
         </div>
-      )
+      );
     }
 
     return (
@@ -105,6 +129,8 @@ export default class SubjectEdit extends React.Component {
             </Col>
             <Col xs={9} md={9}>
               <form className="form-horizontal">
+                {statusElement}
+                {embedElement}
                 <Input type="text" label="Name" value={this.state.modifiedSubject.name} labelClassName="col-xs-2" wrapperClassName="col-xs-10" onChange={this.updateName.bind(this)} />
                 <Input type="text" label="Link" value={this.state.modifiedSubject.link} labelClassName="col-xs-2" wrapperClassName="col-xs-10" onChange={this.updateLink.bind(this)} />
               </form>
