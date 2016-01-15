@@ -31,7 +31,7 @@ export default class SubjectEdit extends React.Component {
   }
 
   publishSubject() {
-    viewpointsApi.publishSubject(this.props.subjectId).then(res => {
+    viewpointsApi.publishSubject(this.state.modifiedSubject.id).then(res => {
       this.setState({modifiedSubject: res});
     });
   }
