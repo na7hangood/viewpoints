@@ -6,6 +6,7 @@ import org.joda.time.DateTime
 import play.api.Logger
 import play.api.libs.functional.syntax._
 import play.api.libs.json.{JsValue, JsPath, Format, Json}
+import services.Config
 
 import scala.util.control.NonFatal
 
@@ -38,6 +39,10 @@ case class Subject(
     }
   }
 
+  def embedLink = { //TODO there's possibly more to do here about draft atoms...
+    Config().capiRoot + s"/atom/viewpoints/$id"
+  }
+
   def denormalise: DenormalisedSubject = {
     DenormalisedSubject(
       id = id,
@@ -48,7 +53,8 @@ case class Subject(
       lastModified = lastModified,
       created = created,
       published = published,
-      state = state
+      state = state,
+      embedLink = embedLink
     )
   }
 
@@ -85,7 +91,8 @@ case class DenormalisedSubject(
                     lastModified: Option[ChangeRecord],
                     created: Option[ChangeRecord],
                     published: Option[ChangeRecord],
-                    state: String
+                    state: String,
+                    embedLink: String
 )
 
 object DenormalisedSubject {
@@ -98,6 +105,7 @@ object DenormalisedSubject {
       (JsPath \ "lastModified").formatNullable[ChangeRecord] and
       (JsPath \ "created").formatNullable[ChangeRecord] and
       (JsPath \ "published").formatNullable[ChangeRecord] and
-      (JsPath \ "state").format[String]
+      (JsPath \ "state").format[String] and
+      (JsPath \ "embedLink").format[String]
     )(DenormalisedSubject.apply, unlift(DenormalisedSubject.unapply))
 }
