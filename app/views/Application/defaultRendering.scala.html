@@ -7,7 +7,6 @@
 <article class="viewpoints-atom" data-subject-id="@subject.id" data-viewpoints-length="@subject.viewpoints.length">
 
     <header class="viewpoints-atom__header">
-        <h2 class="viewpoints-atom__tagline">Viewpoints</h2>
         @if(subject.link.isDefined) {
             <a href="@subject.link.get">
                 <h1 class="viewpoints-atom__viewpoint-title">@subject.name</h1>
@@ -29,18 +28,18 @@
                     <blockquote class="viewpoint__quote">@viewpoint.quote</blockquote>
                 }
 
-                <cite class="viewpoint__candidate-name" data-commenter-id="@viewpoint.commenter.id">@viewpoint.commenter.name<span class="viewpoint__candidate-title">@viewpoint.commenter.description</span></cite>
-
-                @if(viewpoint.date.isDefined) {
-                    @defining(DateTimeFormat.forPattern("d MMMM y")) { dateFormatter =>
-                        <time class="viewpoint__date">@dateFormatter.print(viewpoint.date.get)</time>
-                    }
-                }
+                <cite class="viewpoint__candidate-name" data-commenter-id="@viewpoint.commenter.id">@viewpoint.commenter.name</cite>
             </div>
 
             <aside class="viewpoint__candidate-image-container">
-                <img class="viewpoint__candidate-image" src="@viewpoint.commenter.imageUrl" width="240" alt=""/>
+                <img class="viewpoint__candidate-image" src="@viewpoint.commenter.imageUrl" alt=""/>
             </aside>
+
+            @if(viewpoint.date.isDefined) {
+                @defining(DateTimeFormat.forPattern("d MMMM y")) { dateFormatter =>
+                    <time class="viewpoint__date">@dateFormatter.print(viewpoint.date.get)</time>
+                }
+            }
 
         </section>
     }
