@@ -67,6 +67,13 @@ export default class SubjectEdit extends React.Component {
     });
   }
 
+  deleteSelectedViewpoint(viewpointId) {
+    viewpointsApi.deleteViewpoint(this.state.modifiedSubject.id, viewpointId).then(res => {
+      this.setState({selectedViewpoint: undefined});
+      this.setState({modifiedSubject: res});
+    });
+  }
+
   cancelViewpointEdit() {
     this.setState({selectedViewpoint: undefined});
   }
@@ -109,6 +116,7 @@ export default class SubjectEdit extends React.Component {
       viewpointEditForm = (
         <ViewpointEdit viewpoint={this.state.selectedViewpoint}
                        saveViewpoint={this.saveSelectedViewpoint.bind(this)}
+                       deleteViewpoint={this.deleteSelectedViewpoint.bind(this)}
                        cancelViewpointEdit={this.cancelViewpointEdit.bind(this)}/>
       );
     } else {

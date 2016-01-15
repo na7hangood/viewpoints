@@ -87,6 +87,15 @@ export default {
     });
   },
 
+  deleteViewpoint: (subjectId, viewpointId) => {
+    const url = '/api/subject/' + subjectId + '/viewpoint/' + viewpointId;
+
+    return Reqwest({
+      url: url,
+      method: 'delete'
+    });
+  },
+
   publishSubject: (subjectId) => {
     return Reqwest({
       url: '/api/subject/' + subjectId + '/publish',

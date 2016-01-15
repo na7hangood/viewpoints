@@ -74,6 +74,10 @@ export default class ViewpointEdit extends React.Component {
     this.props.saveViewpoint(this.state.modifiedViewpoint);
   }
 
+  deleteViewpoint() {
+    this.props.deleteViewpoint(this.state.modifiedViewpoint.id);
+  }
+
   renderDatePicker() {
     if(this.state.modifiedViewpoint.date) {
       return (<DateTimeField mode="date" dateTime={this.state.modifiedViewpoint.date} onChange={this.updateDate.bind(this)} />);
@@ -123,6 +127,7 @@ export default class ViewpointEdit extends React.Component {
                 {this.renderDatePicker()}
               </Input>
               <ButtonInput bsStyle="primary" onClick={this.saveModifications.bind(this)} wrapperClassName="col-xs-offset-2 col-xs-10">Save viewpoint</ButtonInput>
+              <ButtonInput bsStyle="danger" onClick={this.deleteViewpoint.bind(this)} wrapperClassName="col-xs-offset-2 col-xs-10">Delete</ButtonInput>
               <ButtonInput bsStyle="primary" onClick={this.props.cancelViewpointEdit} wrapperClassName="col-xs-offset-2 col-xs-10">Cancel</ButtonInput>
             </form>
           </Col>
