@@ -91,6 +91,15 @@ object Api extends Controller with PanDomainAuthActions {
     } getOrElse(NotFound)
   }
 
+  def deleteViewpoint(subjectId: Long, viewpointId: Long) = AuthAction { req =>
+    implicit val user = req.user
+
+    SubjectRepository.getSubject(subjectId).map { s =>
+        val subject = new DeleteViewpointCommand(s, viewpointId).process
+        subject.map{ s => Ok(Json.toJson(s))}.getOrElse(InternalServerError)
+    } getOrElse(NotFound)
+  }
+
   def publishSubject(subjectId: Long) = AuthAction { req =>
     implicit val user = req.user
 
