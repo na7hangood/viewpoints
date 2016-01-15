@@ -27,7 +27,7 @@ object AtomPublisher {
 
     ContentAtomEvent(
       atom = Atom(
-        id = s"viewpoints/${subject.id}",
+        id = subject.id.toString,
         atomType = AtomType.Viewpoints,
         labels = Nil,
         defaultHtml = defaultHtml.toString(),
