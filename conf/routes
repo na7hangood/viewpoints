@@ -1,8 +1,13 @@
 # Handled by client side code
 GET        /                              controllers.App.index
+GET        /commenters                    controllers.App.index
+GET        /subjects                    controllers.App.index
+GET        /categories                    controllers.App.index
+
 GET        /preview/:subjectId            controllers.App.preview(subjectId: Long)
 GET        /oauthCallback                 controllers.Login.oauthCallback
 GET        /logout                        controllers.Login.logout
+
 
 # API
 GET        /api/commenters                controllers.Api.getCommenters
