@@ -119,11 +119,18 @@ export default class SubjectEdit extends React.Component {
                        deleteViewpoint={this.deleteSelectedViewpoint.bind(this)}
                        cancelViewpointEdit={this.cancelViewpointEdit.bind(this)}/>
       );
-    } else {
+    } else if (this.state.modifiedSubject.id) {
       viewpointEditForm = (
         <div>
           <p>Select a viewpoint to edit, or add a new one</p>
           <Button bsStyle="primary" onClick={this.showNewViewpointForm.bind(this)} >Add viewpoint</Button>
+        </div>
+      );
+    } else {
+      //Viewpoints cannot be saved until the subject has an id.
+      viewpointEditForm = (
+        <div>
+          <p>Save the subject to add a viewpoint.</p>
         </div>
       );
     }
