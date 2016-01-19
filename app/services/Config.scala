@@ -31,6 +31,8 @@ sealed trait Config {
   def liveAtomStreamName: String
   def previewAtomStreamName: String
 
+  def capiRoot: String
+
   def logShippingStreamName: Option[String]
   def pandaDomain: String
   def pandaAuthCallback: String
@@ -44,6 +46,8 @@ class DevConfig extends Config {
 
   override def liveAtomStreamName = "content-atom-events-live-CODE"
   override def previewAtomStreamName = "content-atom-events-preview-CODE"
+
+  override def capiRoot = "https://content.code.dev-guardianapis.com"
 
   override def logShippingStreamName = Some("elk-CODE-KinesisStream-M03ERGK5PVD9")
   override def pandaDomain: String = "local.dev-gutools.co.uk"
@@ -59,6 +63,8 @@ class CodeConfig extends Config {
   override def liveAtomStreamName = "content-atom-events-live-CODE"
   override def previewAtomStreamName = "content-atom-events-preview-CODE"
 
+  override def capiRoot = "https://content.code.dev-guardianapis.com"
+
   override def logShippingStreamName = Some("elk-PROD-KinesisStream-1PYU4KS1UEQA")
   override def pandaDomain: String = "code.dev-gutools.co.uk"
   override def pandaAuthCallback: String = "https://viewpoints.code.dev-gutools.co.uk/oauthCallback"
@@ -72,6 +78,8 @@ class ProdConfig extends Config {
 
   override def liveAtomStreamName = "content-atom-events-live-PROD"
   override def previewAtomStreamName = "content-atom-events-preview-PROD"
+
+  override def capiRoot = "https://content.guardianapis.com"
 
   override def logShippingStreamName = Some("elk-PROD-KinesisStream-1PYU4KS1UEQA")
   override def pandaDomain: String = "gutools.co.uk"

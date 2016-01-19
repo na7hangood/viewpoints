@@ -102,7 +102,7 @@ export default class SubjectEdit extends React.Component {
     var embedElement;
     if (this.state.modifiedSubject.id) {
       embedElement = (
-        <FormControls.Static label="Embed string" labelClassName="col-xs-2" wrapperClassName="col-xs-10">/atom/viewpoints/{this.state.modifiedSubject.id}</FormControls.Static>
+        <FormControls.Static label="Embed string" labelClassName="col-xs-2" wrapperClassName="col-xs-10">{this.state.modifiedSubject.embedLink}</FormControls.Static>
       );
     } else {
       embedElement = (
